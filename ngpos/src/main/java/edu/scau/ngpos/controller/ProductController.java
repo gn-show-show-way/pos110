@@ -1,6 +1,6 @@
 package edu.scau.ngpos.controller;
 
-import edu.scau.ngpos.domain.Category;
+import edu.scau.ngpos.core.domain.AjaxResult;
 import edu.scau.ngpos.domain.ProductDescription;
 import edu.scau.ngpos.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -19,12 +18,12 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping("/{productSn}")
-    public ProductDescription getBySn(@PathVariable("productSn") String productSn){
-        return productService.getProductByProductSn(productSn);
+    public AjaxResult getBySn(@PathVariable("productSn") String productSn){
+        return AjaxResult.success(productService.getProductByProductSn(productSn));
     }
 
     @GetMapping("/listAll")
-    public List<ProductDescription> listAllProduct(){
-        return productService.listAllProduct();
+    public AjaxResult listAllProduct(){
+        return AjaxResult.success(productService.listAllProduct());
     }
 }
